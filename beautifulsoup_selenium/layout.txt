@@ -1,17 +1,34 @@
+do --> topic --> video
+
 beautifulsoup_selenium
 
-- install environment
-	- install python with anaconda
-	- install beautifulsoup and selenium with pip
-	- install sublimetext and sublimetext-2-build_view plugin
-	- install kite for python auto completion
+	- install environment
+		- install python with anaconda
+		- install beautifulsoup and selenium with pip
+		- install sublimetext and sublimetext-2-build_view plugin
+		- install kite for python auto completion
 
-- the big picture
+	- the big picture
+		- flow of do webscrape
 
-- inspecting webpage
+	- download html content
+		- visualize browser
+		- headless browser
 
-- download html content
+	- inspecting webpage
 
-- create soup and search for target
+	- create soup and search for target
 
-- scrape data
+	- scrape data
+
+	- NBA project
+
+	- IMDB project
+
+	- AIRBNB project
+
+	- AMAZON project
+
+	- LINKEDIN project
+
+
