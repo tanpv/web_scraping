@@ -1,0 +1,17 @@
+beautifulsoup_selenium
+
+- install environment
+	- install python with anaconda
+	- install beautifulsoup and selenium with pip
+	- install sublimetext and sublimetext-2-build_view plugin
+	- install kite for python auto completion
+
+- the big picture
+
+- inspecting webpage
+
+- download html content
+
+- create soup and search for target
+
+- scrape data
