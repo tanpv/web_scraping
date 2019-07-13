@@ -21,11 +21,13 @@ async function findByLink(page, linkString) {
                                             headless:false,
                                             args: ['--disable-notifications', '--start-maximized']
                                            });
+
     const page = await browser.newPage();
     await page.goto('https://facebook.com');
     await page.click('input[type="submit"]');
     await page.waitForNavigation();
-    
+
+
     await page.waitForSelector('input[type="text"]', {visible: true});
     await page.type('input[type="text"]', 'python programming');
     await page.type('input[type="text"]', String.fromCharCode(13))
