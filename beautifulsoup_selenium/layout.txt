@@ -1,3 +1,8 @@
+why need new version ?
+	- running on jupyter notebook (this is much more simple for other)
+	- make every thing realy realy more simple
+	- more great value for user
+
 do --> topic --> video
 
 beautifulsoup_selenium
@@ -5,8 +10,6 @@ beautifulsoup_selenium
 	- install environment
 		- install python with anaconda
 		- install beautifulsoup and selenium with pip
-		- install sublimetext and sublimetext-2-build_view plugin
-		- install kite for python auto completion
 
 	- the big picture
 		- flow of do webscrape
