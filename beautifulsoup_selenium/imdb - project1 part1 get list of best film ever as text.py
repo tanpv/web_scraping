@@ -1,10 +1,8 @@
 from bs4 import  BeautifulSoup
 from selenium import webdriver
 
-
 options = webdriver.ChromeOptions()
 options.headless  = True
-options.add_argument("--lang=es")
 driver = webdriver.Chrome(executable_path=r'C:\chromedriver_win32\chromedriver.exe', 
 						options=options)
 
@@ -16,3 +14,8 @@ print(soup.prettify())
 table = soup.find('table', class_ = 'chart')
 for td in table.find_all('td', class_ = 'titleColumn'):
 	print(td.text.strip().replace('\n','').replace('      ',''))
+
+
+
+
+
