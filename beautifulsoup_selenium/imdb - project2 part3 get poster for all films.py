@@ -4,19 +4,15 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import requests
 
-class Film():
-	"""docstring for Film"""
-	def __init__(self):		
-		self.rank = ""
-		self.title = ""		
-		self.year = ""
-		self.link = ""
+options = webdriver.ChromeOptions()
+options.headless  = False
+
+chrome_driver_path = r'C:\chromedriver_win32\chromedriver.exe'
+driver = webdriver.Chrome(executable_path=chrome_driver_path, 
+						options=options)
 
 
-def get_film_list():
-
-	driver = webdriver.PhantomJS(executable_path = r'C:\phantomjs-2.1.1-windows\bin\phantomjs.exe')
-
+def get_movies():
 	url = 'http://www.imdb.com/chart/top?ref_=nv_mv_250_6'
 
 	driver.get(url)
@@ -27,50 +23,44 @@ def get_film_list():
 
 	table = soup.find('table', class_ = 'chart')
 
-	film_list = []
+	movies = []
 
 	for td in table.find_all('td', class_ = 'titleColumn'):
 		
 		full_title = td.text.strip().replace('\n','').replace('      ','')
-		print full_title
+		print(full_title)
 
 		rank = full_title.split('.')[0]
-		print rank
+		print(rank)
 
 		title = full_title.split('.')[1].split('(')[0]
-		print title
+		print(title)
 
 		year = full_title.split('(')[1][:-1]
-		print year
+		print(year)
 
 		a = td.find('a')
-		print a['href']
+		print(a['href'])
 
-		print '\n'
+		print('\n')
 
-		new_film = Film()
-		new_film.rank = rank
-		new_film.title = title
-		new_film.year = year
-		new_film.link = a['href']
+		movie = {}
+		movie['rank'] = rank
+		movie['title'] = title
+		movie['year'] = year
+		movie['link'] = a['href']
 
-		film_list.append(new_film)
+		movies.append(movie)
 
-	driver.quit()
+	# driver.quit()
 
-	return film_list
-
-
-def download_all_posters(film_list):
-
-	driver = webdriver.PhantomJS(executable_path = r'C:\phantomjs-2.1.1-windows\bin\phantomjs.exe')
-	
-	for film in film_list:
+	return movies
 
 
-		# url = 'http://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2398042102&pf_rd_r=0PS12P50E86XYMR1RVR3&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1'
+def download_all_posters(movies):
 
-		url = 'http://www.imdb.com/' + film.link
+	for movie in movies[:10]:
+		url = 'http://www.imdb.com/' + movie['link']
 
 		driver.get(url)
 
@@ -92,13 +82,14 @@ def download_all_posters(film_list):
 
 		all_img = all_div[1].find_all('img')
 
-		print all_img[1]['src']
+		print(all_img[1]['src'])
 
-		f = open('{0}.jpg'.format(film.title.encode('utf8').replace(':','')), 'wb')
+		poster = './imdb_posters/{0}.jpg'.format(movie['title'].replace(':',''))
+		f = open(poster, 'wb')
 		f.write(requests.get(all_img[1]['src']).content)
 		f.close()
 
 	driver.quit()
 
 
-download_all_posters( get_film_list() )
+download_all_posters(get_movies())
